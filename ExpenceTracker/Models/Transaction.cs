@@ -33,7 +33,7 @@ namespace ExpenceTracker.Models
         {
             get
             {
-                return ((Category == null || Category.Type=="Expense") ? "- " : "+ " + Category.Title) + Amount.ToString("C0");
+                return ((Category == null || Category.Type=="Expense") ? "- " : "+ ") + Amount.ToString("C0");
             }
         }
     }
