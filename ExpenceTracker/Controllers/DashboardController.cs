@@ -69,7 +69,7 @@ namespace ExpenceTracker.Controllers
 
             //Expense
             List<SplineChartData> ExpenseSummary = SelectedTransactions
-                .Where(i => i.Category.Type == "Income")
+                .Where(i => i.Category.Type == "Expense")
                 .GroupBy(j => j.Date)
                 .Select(k => new SplineChartData()
                 {
@@ -96,6 +96,12 @@ namespace ExpenceTracker.Controllers
                                           expense = expense == null ? 0 : expense.expense,
                                       };
 
+            //Recent Transactions
+            ViewBag.RecentTransactions = await _context.Transactions
+                .Include(i => i.Category)
+                .OrderByDescending(j => j.Date)
+                .Take(5)
+                .ToListAsync();
 
 
             return View();
